@@ -1,0 +1,42 @@
+<div class="list row p-3">
+    <div class="col-md-12 mb-4">
+        <div class="input-group search-bar shadow-sm">
+            <input type="text" class="form-control rounded-pill-start" placeholder="Buscar sala por nombre..." [(ngModel)]="name" />
+            <div class="input-group-append">
+                <button class="btn btn-primary rounded-pill-end shadow-sm" type="button" (click)="searchByName()">Buscar</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-7">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-secondary fw-bold">Salas Disponibles</h4>
+        <button class="btn btn-sm btn-outline-danger shadow-sm" (click)="removeAllRooms()">Borrar Todo</button>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+      <div class="col" *ngFor="let room of rooms; let i = index">
+        <div class="card room-card shadow-sm h-100 border-0" [class.border-primary]="i == currentIndex" (click)="setActiveRoom(room, i)">
+            <div class="card-header bg-white border-0 pb-0 pt-3">
+                <span class="badge bg-light text-primary text-uppercase">{{ room.reunionType }}</span>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title fw-bold text-dark">{{ room.name }}</h5>
+                <p class="card-text text-muted mb-1">Capacidad: <strong>{{ room.capacity }}</strong></p>
+                <p class="card-text text-primary fs-5 fw-bold">{{ room.pricePerHour }} €/hora</p>
+            </div>
+            <div class="card-footer bg-white border-0 pt-0 pb-3">
+                <span *ngIf="room.isReserved" class="text-danger fw-bold fs-7">Reservada</span>
+                <span *ngIf="!room.isReserved" class="text-success fw-bold fs-7">Disponible</span>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-5 mt-4 mt-md-0">
+    <div *ngIf="currentRoom.id" class="sticky-top offset-top shadow-lg">
+        <app-room-details [viewMode]="true" [currentRoom]="currentRoom"></app-room-details>
+    </div>
+</div>
+</div>

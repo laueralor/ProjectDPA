@@ -1,0 +1,60 @@
+<div *ngIf="currentRoom.id" class="edit-form card shadow border-0 p-4">
+    <h4 class="text-primary fw-bold mb-4">{{ viewMode ? 'Resumen de Sala' : 'Editar Detalles' }}</h4>
+    
+    <form>
+        <div class="form-group mb-3">
+        <label for="name" class="fw-bold">Nombre</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="currentRoom.name" name="name" [disabled]="viewMode" />
+        </div>
+
+        <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="fw-bold">Capacidad</label>
+            <input type="number" class="form-control" [(ngModel)]="currentRoom.capacity" name="capacity" [disabled]="viewMode" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="fw-bold">Precio/h</label>
+            <input type="number" class="form-control" [(ngModel)]="currentRoom.pricePerHour" name="price" [disabled]="viewMode" />
+        </div>
+        </div>
+
+        <div class="form-group mb-3">
+        <label class="fw-bold">Tipo de Reunión</label>
+        <select class="form-control" [(ngModel)]="currentRoom.reunionType" name="reunionType" [disabled]="viewMode">
+            <option value="CUMPLEANOS">Cumpleaños</option>
+            <option value="BODA">Boda</option>
+            <option value="CONCIERTO">Concierto</option>
+            <option value="EMPRESA">Empresa</option>
+        </select>
+        </div>
+
+        <div class="form-group mb-4">
+        <label class="fw-bold d-block">Estado Actual:</label>
+        <span [class]="currentRoom.isReserved ? 'badge bg-danger' : 'badge bg-success'">
+            {{ currentRoom.isReserved ? 'Reservada' : 'Disponible' }}
+        </span>
+        </div>
+    </form>
+
+    <div class="d-flex flex-wrap gap-2">
+        <button *ngIf="currentRoom.isReserved" class="btn btn-outline-success btn-sm" (click)="updateReserved(false)">
+        Liberar Sala
+        </button>
+        <button *ngIf="!currentRoom.isReserved" class="btn btn-outline-danger btn-sm" (click)="updateReserved(true)">
+        Reservar Ahora
+        </button>
+
+        <button *ngIf="!viewMode" class="btn btn-danger btn-sm" (click)="deleteRoom()">Eliminar</button>
+        <button *ngIf="!viewMode" type="submit" class="btn btn-primary btn-sm" (click)="updateRoom()">Actualizar</button>
+        
+        <a *ngIf="viewMode" class="btn btn-warning btn-sm shadow-sm" routerLink="/rooms/{{ currentRoom.id }}">
+        Ir a Edición Pro
+        </a>
+    </div>
+
+    <p class="mt-3 text-success small fw-bold">{{ message }}</p>
+</div>
+
+<div *ngIf="!currentRoom.id" class="text-center p-5">
+    <p class="text-muted">Selecciona una sala para ver los detalles...</p>
+</div>

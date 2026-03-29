@@ -1,0 +1,18 @@
+.edit-form {
+    border-radius: 15px;
+    background: #fdfdfd;
+}
+
+label {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.badge {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+}
+
+.gap-2 {
+    gap: 0.5rem !important;
+}

@@ -1,0 +1,40 @@
+<div class="submit-form card shadow-sm p-4">
+    <div *ngIf="!submitted">
+        <h3 class="text-center mb-4 text-primary">Registrar Nueva Sala</h3>
+        
+        <div class="form-group mb-3">
+        <label for="name" class="fw-bold">Nombre de la Sala</label>
+        <input type="text" class="form-control" id="name" required [(ngModel)]="room.name" name="name" placeholder="Ej: Sala Imperial" />
+        </div>
+
+        <div class="row">
+        <div class="col-md-6 form-group mb-3">
+            <label for="capacity" class="fw-bold">Capacidad (pax)</label>
+            <input type="number" class="form-control" id="capacity" required [(ngModel)]="room.capacity" name="capacity" />
+        </div>
+
+        <div class="col-md-6 form-group mb-3">
+            <label for="price" class="fw-bold">Precio/Hora (€)</label>
+            <input type="number" class="form-control" id="price" required [(ngModel)]="room.pricePerHour" name="price" />
+        </div>
+        </div>
+
+        <div class="form-group mb-4">
+        <label for="tipo" class="fw-bold">Tipo de Evento</label>
+        <select class="form-control" id="tipo" required [(ngModel)]="room.reunionType" name="tipo">
+            <option value="" disabled selected>Selecciona un tipo...</option>
+            <option value="CUMPLEANOS">Cumpleaños</option>
+            <option value="BODA">Boda</option>
+            <option value="CONCIERTO">Concierto</option>
+            <option value="EMPRESA">Empresa</option>
+        </select>
+        </div>
+
+        <button (click)="saveRoom()" class="btn btn-primary w-100 shadow">Confirmar Registro</button>
+    </div>
+
+    <div *ngIf="submitted" class="text-center py-5">
+        <div class="alert alert-success">¡Sala registrada correctamente!</div>
+        <button class="btn btn-outline-primary" (click)="newRoom()">Añadir otra sala</button>
+    </div>
+</div>
