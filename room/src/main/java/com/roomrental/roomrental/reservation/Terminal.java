@@ -39,7 +39,7 @@ public class Terminal implements Runnable {
                     case "reserveRoom": 
                         SimpleEntry<Integer, Boolean> data = (SimpleEntry<Integer, Boolean>) res.data;
                         String result = data.getValue() ? "SUCCESSFUL" : "FAILED";
-                        System.out.println("Terminal " + terminalId + ": Booking room " + data.getKey() + " -> " + result); 
+                        System.out.println("Terminal " + terminalId + ": Reserving room " + data.getKey() + " -> " + result); 
                         break;
                 }
             }
