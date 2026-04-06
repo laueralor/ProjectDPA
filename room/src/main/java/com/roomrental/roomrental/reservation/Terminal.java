@@ -1,7 +1,6 @@
 package reservation;
 
 import java.util.AbstractMap.SimpleEntry;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.BlockingQueue;
 
@@ -24,24 +23,23 @@ public class Terminal implements Runnable {
     @Override
     public void run() {
         try {
-            requests.put(new Request(this.terminalId, "getReservationStatus", null));
-            requests.put(new Request(this.terminalId, "book", 2)); 
-            requests.put(new Request(this.terminalId, "book", 3)); 
-            requests.put(new Request(this.terminalId, "getReservationStatus", null));
+            requests.put(new Request(this.terminalId, "getReservationStatus", null)); 
+            requests.put(new Request(this.terminalId, "reserveRoom", 2)); 
+            requests.put(new Request(this.terminalId, "reserveRoom", 3)); 
+            requests.put(new Request(this.terminalId, "getReservationStatus", null)); 
 
             while (true) {
                 Response res = responses.take();
                 
                 switch (res.function) {
                     case "getReservationStatus":
-                        TreeMap<Integer, Boolean> reservations = (TreeMap<Integer, Boolean>) res.data;
                         System.out.println("Terminal " + terminalId + " - Status updated.");
                         break;
                         
-                    case "book":
+                    case "reserveRoom": 
                         SimpleEntry<Integer, Boolean> data = (SimpleEntry<Integer, Boolean>) res.data;
                         String result = data.getValue() ? "SUCCESSFUL" : "FAILED";
-                        System.out.println("Terminal " + terminalId + ": Booking room " + data.getKey() + " -> " + result);
+                        System.out.println("Terminal " + terminalId + ": Booking room " + data.getKey() + " -> " + result); 
                         break;
                 }
             }
