@@ -1,4 +1,4 @@
-package reservation;
+package com.roomrental.roomrental.reservation;
 
 public class Response {
     public String function; 

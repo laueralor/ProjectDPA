@@ -1,4 +1,4 @@
-package reservation;
+package com.roomrental.roomrental.reservation;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.TreeMap;

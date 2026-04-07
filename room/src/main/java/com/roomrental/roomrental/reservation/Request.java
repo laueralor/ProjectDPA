@@ -1,4 +1,4 @@
-package reservation;
+package com.roomrental.roomrental.reservation;
 
 public class Request {
     public int terminalId;   
